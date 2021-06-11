@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "20776021408",
+    "firebase_url": "https://logindemo-9ea36.firebaseio.com",
+    "project_id": "logindemo-9ea36",
+    "storage_bucket": "logindemo-9ea36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20776021408:android:950d3bba3b12f19687c8c5",
+        "android_client_info": {
+          "package_name": "com.example.libraryb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20776021408-7nc38m5bpsjeb4q6as9o9p0v9b2jh82e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAaJPmiihrJ37M8QT-yA1JfaA9CjsgqVE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20776021408-7nc38m5bpsjeb4q6as9o9p0v9b2jh82e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
