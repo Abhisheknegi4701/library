@@ -1,10 +1,20 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:google_fonts/google_fonts.dart';
 import 'package:libraryb/LoginSignup.dart';
+import 'package:libraryb/ShowData.dart';
 
-void main() {
+import 'EmailSignup.dart';
+
+final FirebaseAuth fireauth = FirebaseAuth.instance;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(debugShowCheckedModeBanner: false, home: SplashScreen()));
 }
 
@@ -16,22 +26,23 @@ class SplashScreen extends StatefulWidget {
 }
 
 class SplashScreenState extends State<SplashScreen> {
-  /*Future check() async {
-    final FirebaseUser user = await fireauth.currentUser();
+  Future check() async {
+    final User? user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => new EmailLoginScreen()));
-    }else{
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => new Home()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => new WelcomePage()));
+    } else {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (context) => new Home()));
     }
-  }*/
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => new WelcomePage()));
+      check();
     });
   }
 
@@ -57,6 +68,7 @@ class WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SingleChildScrollView(
           child: Container(
@@ -74,20 +86,19 @@ class WelcomePageState extends State<WelcomePage> {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Color(0xfffbb448), Color(0xffe46b10)])),
+                    colors: [Color(0xFF46D3F6), Color(0xFF182DBA)])),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RichText(
-                  textAlign: TextAlign.center,
                   text: TextSpan(
                       text: 'Li',
                       style: GoogleFonts.portLligatSans(
                         textStyle: Theme.of(context).textTheme.headline4,
                         fontSize: 30,
                         fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        color: Color(0xFF182DBA),
                       ),
                       children: [
                         TextSpan(
@@ -96,7 +107,8 @@ class WelcomePageState extends State<WelcomePage> {
                         ),
                         TextSpan(
                           text: 'ary',
-                          style: TextStyle(color: Colors.white, fontSize: 30),
+                          style:
+                              TextStyle(color: Color(0xFF182DBA), fontSize: 30),
                         ),
                       ]),
                 ),
@@ -116,7 +128,7 @@ class WelcomePageState extends State<WelcomePage> {
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                              color: Color(0xffdf8e33).withAlpha(100),
+                              color: Color(0xFF46D3F6).withAlpha(100),
                               offset: Offset(2, 4),
                               blurRadius: 8,
                               spreadRadius: 2)
@@ -124,7 +136,7 @@ class WelcomePageState extends State<WelcomePage> {
                         color: Colors.white),
                     child: Text(
                       'Login',
-                      style: TextStyle(fontSize: 20, color: Color(0xfff7892b)),
+                      style: TextStyle(fontSize: 20, color: Color(0xFF182DBA)),
                     ),
                   ),
                 ),
@@ -152,6 +164,25 @@ class WelcomePageState extends State<WelcomePage> {
                 ),
                 SizedBox(
                   height: 20,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Home()));
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.symmetric(vertical: 13),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                    child: Text(
+                      'Skip>>',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ),
                 ),
               ],
             ),
